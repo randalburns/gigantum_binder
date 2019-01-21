@@ -1,0 +1,80 @@
+---
+title: "DataCamp TidyVerse dplyr"
+output: html_notebook
+---
+
+This notebook tracks the [DataCamp TidyVerse course](https://www.datacamp.com/courses/introduction-to-the-tidyverse).  This is Chapter 1 about `dplyr` verbs to manuiplate data.
+This notebook covers verbs `filter`, `arrange`, 
+
+### Video 1: Gapminder
+
+```{r}
+# Load the gapminder package
+library(gapminder)
+
+# Load the dplyr package
+library(dplyr)
+
+# Look at the gapminder dataset
+gapminder
+```
+
+### Filter Operations
+
+Select data according to feature values.
+
+```{r}
+gapminder %>%
+  filter(year == 1957)
+```
+```{r}
+gapminder %>%
+  filter(country == 'China', year == 2002)
+```
+
+
+### Arrange Verb
+
+Sort the data set in ascending and descending order.
+
+```{r}
+gapminder %>%
+  arrange(lifeExp)
+```
+
+```{r}
+# Sort in ascending order of lifeExp
+gapminder %>%
+  arrange(lifeExp)
+  
+# Sort in descending order of lifeExp
+gapminder %>%
+  arrange(desc(lifeExp))
+```
+
+```{r}
+# Filter for the year 1957, then arrange in descending order of population
+gapminder %>%
+  filter(year==1957) %>%
+  arrange(desc(pop))
+```
+
+### Mutate Verb
+
+```{r}
+# Use mutate to change lifeExp to be in months
+gapminder %>%
+  mutate(lifeExp = lifeExp * 12)
+
+# Use mutate to create a new column called lifeExpMonths
+gapminder %>%
+  mutate(lifeExpMonths = lifeExp * 12)
+```
+
+```{r}
+# Filter, mutate, and arrange the gapminder dataset
+gapminder %>%
+  filter(year == 2007) %>%
+  mutate(lifeExpMonths = lifeExp * 12) %>%
+  arrange(desc(lifeExpMonths))
+```
